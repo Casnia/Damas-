@@ -1,0 +1,460 @@
+:root {
+    /* Variables para el tema moderno */
+    --modern-light: #c0d6e4;
+    --modern-dark: #2c3e50;
+    --modern-piece-white: #ffffff;
+    --modern-piece-black: #1a1a1a;
+    --modern-border: #4a90e2;
+    
+    /* Variables para el tema rústico */
+    --rustic-light: #d4b895;
+    --rustic-dark: #8b4513;
+    --rustic-piece-white: #f5deb3;
+    --rustic-piece-black: #3e2723;
+    --rustic-border: #5d4037;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+    padding: 20px;
+}
+
+/* Pantalla de inicio */
+.start-screen {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 3rem;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    max-width: 800px;
+    width: 90%;
+}
+
+.start-content {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.start-screen h1 {
+    color: #2c3e50;
+    font-size: 3rem;
+    margin-bottom: 2rem;
+    font-weight: 700;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.credits {
+    margin-top: 2rem;
+    color: #666;
+    font-style: italic;
+}
+
+.style-selector {
+    margin-bottom: 3rem;
+}
+
+.style-selector h2 {
+    color: #34495e;
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+}
+
+.style-options {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    margin-bottom: 2rem;
+}
+
+.style-option {
+    cursor: pointer;
+    padding: 1.5rem;
+    border-radius: 15px;
+    transition: all 0.3s ease;
+    background: #fff;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.style-option:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.style-option.selected {
+    background: #e8f0fe;
+    box-shadow: 0 5px 15px rgba(74, 144, 226, 0.2);
+    border: 2px solid var(--modern-border);
+}
+
+.style-preview {
+    width: 180px;
+    height: 180px;
+    border-radius: 15px;
+    margin-bottom: 1rem;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.modern-preview {
+    background: linear-gradient(45deg, var(--modern-dark) 25%, var(--modern-light) 25%, var(--modern-light) 75%, var(--modern-dark) 75%);
+    background-size: 80px 80px;
+}
+
+.rustic-preview {
+    background: url('data:image/svg+xml,<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><rect width="50" height="50" fill="%238b4513"/><rect x="50" y="50" width="50" height="50" fill="%238b4513"/><rect x="50" y="0" width="50" height="50" fill="%23d4b895"/><rect x="0" y="50" width="50" height="50" fill="%23d4b895"/></svg>');
+    background-size: 80px 80px;
+}
+
+.start-button, .reset-button, .menu-button {
+    padding: 1rem 2.5rem;
+    font-size: 1.3rem;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: linear-gradient(135deg, #1a2a6c, #b21f1f);
+    color: white;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.start-button:hover, .reset-button:hover, .menu-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    filter: brightness(1.1);
+}
+
+/* Pantalla del juego */
+.game-screen {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 2rem;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.game-screen.hidden {
+    display: none;
+}
+
+.game-header {
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.game-header h2 {
+    color: #2c3e50;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.turn-banner {
+    background: linear-gradient(135deg, #1a2a6c, #b21f1f);
+    color: white;
+    padding: 1rem;
+    border-radius: 15px;
+    margin-bottom: 1rem;
+    font-size: 1.3rem;
+    font-weight: 600;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.board {
+    display: grid;
+    grid-template-columns: repeat(8, 70px);
+    grid-template-rows: repeat(8, 70px);
+    gap: 0;
+    border: 3px solid var(--modern-border);
+    border-radius: 10px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    margin: 0 auto;
+}
+
+/* Estilos para el tema moderno */
+.board.modern .square.white {
+    background-color: var(--modern-light);
+}
+
+.board.modern .square.black {
+    background-color: var(--modern-dark);
+}
+
+.board.modern .piece.white {
+    background-color: var(--modern-piece-white);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border: 2px solid #e0e0e0;
+}
+
+.board.modern .piece.black {
+    background-color: var(--modern-piece-black);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    border: 2px solid #4a4a4a;
+}
+
+/* Estilos para el tema rústico */
+.board.rustic .square.white {
+    background-color: var(--rustic-light);
+    background-image: url('data:image/svg+xml,<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><filter id="noise"><feTurbulence type="fractalNoise" baseFrequency="0.8"/></filter><rect width="100" height="100" filter="url(%23noise)" opacity="0.1"/></svg>');
+}
+
+.board.rustic .square.black {
+    background-color: var(--rustic-dark);
+    background-image: url('data:image/svg+xml,<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><filter id="noise"><feTurbulence type="fractalNoise" baseFrequency="0.8"/></filter><rect width="100" height="100" filter="url(%23noise)" opacity="0.1"/></svg>');
+}
+
+.board.rustic .piece {
+    border-radius: 50%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    background-image: url('data:image/svg+xml,<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><filter id="grain"><feTurbulence type="fractalNoise" baseFrequency="0.8"/></filter><rect width="100" height="100" filter="url(%23grain)" opacity="0.1"/></svg>');
+}
+
+.board.rustic .piece.white {
+    background-color: var(--rustic-piece-white);
+    border: 2px solid #8b7355;
+}
+
+.board.rustic .piece.black {
+    background-color: var(--rustic-piece-black);
+    border: 2px solid #2c1810;
+}
+
+.square {
+    width: 70px;
+    height: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+.piece {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.piece:hover {
+    transform: scale(1.1);
+}
+
+.piece.king {
+    animation: kingGlow 2s infinite;
+}
+
+.piece.king::after {
+    content: '♔';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 32px;
+    color: gold;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.valid-move {
+    position: relative;
+}
+
+.valid-move::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 24px;
+    height: 24px;
+    background-color: rgba(46, 204, 113, 0.4);
+    border-radius: 50%;
+    animation: pulse 1.5s infinite;
+}
+
+.game-footer {
+    margin-top: 2rem;
+    text-align: center;
+}
+
+@keyframes pulse {
+    0% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0.6;
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(1.2);
+        opacity: 0.3;
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0.6;
+    }
+}
+
+@keyframes kingGlow {
+    0% {
+        box-shadow: 0 0 10px gold;
+    }
+    50% {
+        box-shadow: 0 0 20px gold, 0 0 30px gold;
+    }
+    100% {
+        box-shadow: 0 0 10px gold;
+    }
+}
+
+/* Estilos para la pantalla de resultado */
+.result-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.result-content {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 1rem;
+    text-align: center;
+    animation: fadeIn 0.5s ease-in;
+}
+
+.result-content h2 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.victory .result-content h2 {
+    color: #2ecc71;
+}
+
+.defeat .result-content h2 {
+    color: #e74c3c;
+}
+
+.reset-button {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    font-size: 1.2rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.reset-button:hover {
+    background-color: #2980b9;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Estilos responsivos para dispositivos móviles */
+@media screen and (max-width: 768px) {
+    .board {
+        grid-template-columns: repeat(8, 40px);
+        grid-template-rows: repeat(8, 40px);
+    }
+
+    .square {
+        width: 40px;
+        height: 40px;
+    }
+
+    .piece {
+        width: 35px;
+        height: 35px;
+    }
+
+    .piece.king::after {
+        font-size: 24px;
+    }
+
+    .start-screen {
+        padding: 1.5rem;
+    }
+
+    .start-screen h1 {
+        font-size: 2rem;
+    }
+
+    .style-options {
+        gap: 1rem;
+    }
+
+    .style-preview {
+        width: 120px;
+        height: 120px;
+    }
+
+    .start-button, .reset-button, .menu-button {
+        padding: 0.8rem 1.5rem;
+        font-size: 1.1rem;
+    }
+
+    .game-header h2 {
+        font-size: 1.5rem;
+    }
+
+    .turn-banner {
+        font-size: 1.1rem;
+        padding: 0.8rem;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .board {
+        grid-template-columns: repeat(8, 35px);
+        grid-template-rows: repeat(8, 35px);
+    }
+
+    .square {
+        width: 35px;
+        height: 35px;
+    }
+
+    .piece {
+        width: 30px;
+        height: 30px;
+    }
+
+    .piece.king::after {
+        font-size: 20px;
+    }
+
+    .style-options {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .start-screen h1 {
+        font-size: 1.8rem;
+    }
+} 

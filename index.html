@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Damas</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Sonidos del juego -->
+    <audio id="moveSound" src="https://assets.mixkit.co/active_storage/sfx/2571/2571-preview.mp3" preload="auto"></audio>
+    <audio id="captureSound" src="https://assets.mixkit.co/active_storage/sfx/2572/2572-preview.mp3" preload="auto"></audio>
+    <audio id="kingSound" src="https://assets.mixkit.co/active_storage/sfx/2573/2573-preview.mp3" preload="auto"></audio>
+</head>
+<body>
+    <!-- Pantalla de inicio -->
+    <div id="start-screen" class="start-screen">
+        <div class="start-content">
+            <h1>Damas</h1>
+            <div class="style-selector">
+                <h2>Selecciona un Estilo</h2>
+                <div class="style-options">
+                    <div class="style-option" data-style="modern">
+                        <div class="style-preview modern-preview"></div>
+                        <span>Moderno</span>
+                    </div>
+                    <div class="style-option" data-style="rustic">
+                        <div class="style-preview rustic-preview"></div>
+                        <span>Rústico</span>
+                    </div>
+                </div>
+            </div>
+            <button id="start-button" class="start-button">Iniciar Juego</button>
+            <p class="credits">Creado por Mateo Borda</p>
+        </div>
+    </div>
+
+    <!-- Pantalla del juego -->
+    <div id="game-screen" class="game-screen hidden">
+        <div class="game-container">
+            <div class="game-header">
+                <h2>Damas</h2>
+                <div id="turn-banner" class="turn-banner">
+                    <span id="turn-message" class="turn-message">Turno de Blancas</span>
+                </div>
+                <button id="reset-button" class="reset-button">Reiniciar Juego</button>
+            </div>
+            <div id="board" class="board"></div>
+            <div class="game-footer">
+                <button id="back-to-menu" class="menu-button">Volver al Menú</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html> 
